@@ -3,6 +3,7 @@ import { Header } from "./Header";
 import { Footer } from "./Footer";
 import { Contact } from "./Contact";
 import { Home } from "./Home";
+import { ProductsDetails } from "./ProductsDetails";
 
 export function Router() {
   const Layout = () => {
@@ -22,6 +23,7 @@ export function Router() {
           <Route path="/" element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="contact-us" element={<Contact />} />
+            <Route path="product/:id" element={<ProductsDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>
