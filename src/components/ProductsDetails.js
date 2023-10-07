@@ -1,12 +1,49 @@
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import Context from "./Context";
 
 export function ProductsDetails() {
   const params = useParams();
+  let productData = null;
+  const userData = useContext(Context);
+
+  //   database look using id
+  switch (params.id) {
+    case "143":
+      productData = {
+        name: "Hoodie",
+        price: 50.0,
+        image: require("../assets/images/good-day-to-code.jpg"),
+      };
+      break;
+
+    case "486":
+      productData = {
+        name: "Coffee Mug",
+        price: 25.0,
+        image: require("../assets/images/eat-sleep-code-repeat.jpg"),
+      };
+      break;
+
+    default:
+      break;
+  }
 
   return (
     <>
       <h1>Products Details</h1>
       <p>The product ID is {params.id}</p>
+      <p>Cart Items: {userData.cartItems}</p>
+      {productData != null ? (
+        <>
+          <img src={productData.image} alt={productData.name} width="400" />
+          <h2>
+            {productData.name} - ${productData.price}
+          </h2>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 }
