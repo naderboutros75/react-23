@@ -10,7 +10,9 @@ export function Router() {
     return (
       <>
         <Header />
-        <Outlet />
+        <div className="content">
+          <Outlet />
+        </div>
         <Footer />
       </>
     );

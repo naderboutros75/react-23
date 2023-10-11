@@ -17,6 +17,7 @@ export function Header() {
         <li>
           <a href="/contact-us">Contacts</a>
         </li>
+        <li>Hello {userData.name}</li>
         <li>Cart: {userData.cartItems}</li>
       </ul>
     </nav>
