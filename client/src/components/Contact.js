@@ -29,13 +29,25 @@ export function Contact() {
 
   const axiosFetchData = async (processing) => {
     await axios
-      .get("https://jsonplaceholder.typicode.com/users")
+      .get("http://localhost:4000/users")
       .then((res) => {
         if (processing) {
           setSelectData(res.data);
         }
       })
       .catch((err) => console.log(err));
+  };
+
+  const axiosPostData = async () => {
+    const postData = {
+      email: email,
+      website: selectValue,
+      message: message,
+    };
+
+    await axios
+      .post("http://localhost:4000/contact", postData)
+      .then((res) => setError(<p className="success">{res.data}</p>));
   };
 
   const SelectDropdown = () => {
@@ -56,8 +68,10 @@ export function Contact() {
   };
 
   const handleSubmit = (e) => {
-    console.log(email + " | " + message + " | " + selectValue);
     e.preventDefault();
+
+    // console.log(email + " | " + message + " | " + selectValue);
+
     if (!message) {
       setError(
         <p className="required">Message is empty. Please type a message.</p>
@@ -65,6 +79,9 @@ export function Contact() {
     } else {
       setError("");
     }
+
+    setError("");
+    axiosPostData();
   };
 
   return (
@@ -81,9 +98,6 @@ export function Contact() {
         />
 
         <label>How did you hear about us?</label>
-        {/* <select name="" id="">
-          <option value=""></option>
-        </select> */}
         <SelectDropdown />
 
         <label>Message</label>
